@@ -1,21 +1,13 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: -apple-system, 'Ubuntu', 'Segoe UI', sans-serif,
-        sans-serif;
-}
-
-code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-        monospace;
-}
-
 .button-container {
     height: 90px;
     display: flex;
     align-items: flex-end;
+}
+
+.search-container {
+    margin-bottom: 30px;
+}
+
+.search-container h1 {
+    margin-bottom: 20px;
 }

@@ -5,13 +5,15 @@ import { Component } from 'react';
 import { loadPosts } from '../../utils/load-posts';
 import { Posts } from '../../components/Posts';
 import { Button } from '../../components/Button';
+import { TextInput } from '../../components/TextInput';
 
 class Home extends Component {
   state = {
     posts: [],
     allPosts: [],
     page: 0,
-    postsPerPage: 99
+    postsPerPage: 3,
+    searchValue: ''
   };
 
   async componentDidMount() {
@@ -24,7 +26,7 @@ class Home extends Component {
       postsPerPage,
       allPosts,
       posts
-    } = this.state
+    } = this.state;
 
     const nextPage = page + postsPerPage;
     const nextPosts = allPosts.slice(nextPage, nextPage + postsPerPage);
@@ -43,19 +45,44 @@ class Home extends Component {
     })
   }
 
+  handleChange = (e) => {
+    const { value } = e.target;
+    this.setState({ searchValue: value })
+    
+  }
+
   render() {
-    const { posts, page, postsPerPage, allPosts } = this.state;
+    const { posts, page, postsPerPage, allPosts, searchValue } = this.state;
     const noMorePosts = page + postsPerPage >= allPosts.length
+
+    const filteredPosts = !!searchValue
+    ? allPosts.filter(post => post.title.toLowerCase().includes(searchValue.toLowerCase()))
+    : posts
+    
 
     return (
       <section className='container'>
-        <Posts posts={posts} />
+        <div className='search-container'>
+          {!!searchValue && (
+            <h1>Search value: {searchValue} <br /></h1>
+          )}
+
+          <TextInput handleChange={this.handleChange} searchValue={searchValue}/>
+        </div>
+
+        {filteredPosts.length > 0
+          ? <Posts posts={filteredPosts} />
+          : <p>Não existem posts =/</p>
+        }
+        
         <div className='button-container'>
-        <Button
-        text={"Load More Posts"}
-        click={this.loadMorePosts}
-        disabled={noMorePosts}
-        />
+          {! searchValue && (
+            <Button
+            text={"Load More Posts"}
+            click={this.loadMorePosts}
+            disabled={noMorePosts}
+            />
+          )}
         </div>
       </section>
     )

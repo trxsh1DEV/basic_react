@@ -5,3 +5,19 @@
   background-color: #eee;
   padding: 15px;
 }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, 'Ubuntu', 'Segoe UI', sans-serif,
+      sans-serif;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+}
