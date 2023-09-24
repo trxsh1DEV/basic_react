@@ -2,5 +2,5 @@
 export const postCardPropsMock = {
   title: 'text',
   body: 'body',
-  cover: 'img/img.png'
-}
+  cover: 'img/img.png',
+};

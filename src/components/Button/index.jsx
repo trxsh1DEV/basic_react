@@ -13,10 +13,6 @@ export class Button extends Component {
   }
 }
 
-Button.defaultProps = {
-  disabled: false,
-};
-
 Button.propTypes = {
   text: P.string.isRequired,
   click: P.func.isRequired,
