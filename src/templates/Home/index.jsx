@@ -22,7 +22,7 @@ export const Home = () => {
   }, []);
 
   useEffect(() => {
-    console.log(new Date().toLocaleString('pt-BR'));
+    // console.log(new Date().toLocaleString('pt-BR'));
     handleLoadPosts(0, postsPerPage);
   }, [handleLoadPosts, postsPerPage]);
 
@@ -43,7 +43,9 @@ export const Home = () => {
   const noMorePosts = page + postsPerPage >= allPosts.length;
 
   const filteredPosts = searchValue
-    ? allPosts.filter((post) => post.title.toLowerCase().includes(searchValue.toLowerCase()))
+    ? allPosts.filter((post) =>
+        post.title.toLowerCase().includes(searchValue.toLowerCase()),
+      )
     : posts;
 
   return (
@@ -58,10 +60,20 @@ export const Home = () => {
         <TextInput handleChange={handleChange} inputValue={searchValue} />
       </div>
 
-      {filteredPosts.length > 0 ? <Posts posts={filteredPosts} /> : <p>Não existem posts =/</p>}
+      {filteredPosts.length > 0 ? (
+        <Posts posts={filteredPosts} />
+      ) : (
+        <p>Não existem posts =/</p>
+      )}
 
       <div className="button-container">
-        {!searchValue && <Button text={'Load More Posts'} click={loadMorePosts} disabled={noMorePosts} />}
+        {!searchValue && (
+          <Button
+            text={'Load More Posts'}
+            click={loadMorePosts}
+            disabled={noMorePosts}
+          />
+        )}
       </div>
     </section>
   );
